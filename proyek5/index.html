@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Diagnosis Diabetes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistem Pakar Diagnosis Diabetes</h1>
+            <p>Deteksi dini risiko diabetes dengan menjawab beberapa pertanyaan</p>
+        </header>
+        
+        <div class="intro">
+            <p>Diabetes adalah penyakit kronis yang ditandai dengan tingginya kadar gula darah. Sistem ini akan membantu Anda menilai risiko diabetes berdasarkan gejala dan faktor risiko yang Anda alami.</p>
+            <p><strong>Catatan:</strong> Hasil diagnosis ini hanya sebagai informasi awal dan tidak menggantikan konsultasi dengan dokter.</p>
+        </div>
+        
+        <div class="questionnaire" id="questionnaire">
+            <div class="question">
+                <h3>1. Apakah Anda sering merasa haus?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_0" value="0">
+                        <label for="q1_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_1" value="1">
+                        <label for="q1_1">Kadang</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_2" value="2">
+                        <label for="q1_2">Sering</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>2. Apakah Anda sering buang air kecil?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_0" value="0">
+                        <label for="q2_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_1" value="1">
+                        <label for="q2_1">Kadang</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_2" value="2">
+                        <label for="q2_2">Sering</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>3. Apakah Anda sering merasa lapar?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_0" value="0">
+                        <label for="q3_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_1" value="1">
+                        <label for="q3_1">Kadang</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_2" value="2">
+                        <label for="q3_2">Sering</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>4. Apakah Anda mengalami penurunan berat badan tanpa sebab yang jelas?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_0" value="0">
+                        <label for="q4_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_1" value="1">
+                        <label for="q4_1">Sedikit</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_2" value="2">
+                        <label for="q4_2">Signifikan</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>5. Apakah Anda sering merasa lelah?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_0" value="0">
+                        <label for="q5_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_1" value="1">
+                        <label for="q5_1">Kadang</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_2" value="2">
+                        <label for="q5_2">Sering</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>6. Apakah penglihatan Anda menjadi kabur?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_0" value="0">
+                        <label for="q6_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_1" value="1">
+                        <label for="q6_1">Kadang</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_2" value="2">
+                        <label for="q6_2">Sering</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>7. Apakah luka Anda lambat sembuh?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_0" value="0">
+                        <label for="q7_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_1" value="1">
+                        <label for="q7_1">Agak lambat</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_2" value="2">
+                        <label for="q7_2">Sangat lambat</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>8. Apakah ada riwayat diabetes dalam keluarga?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_0" value="0">
+                        <label for="q8_0">Tidak</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_1" value="1">
+                        <label for="q8_1">Salah satu orang tua</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_2" value="2">
+                        <label for="q8_2">Kedua orang tua</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>9. Berapa usia Anda?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_0" value="0">
+                        <label for="q9_0">Dibawah 30</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_1" value="1">
+                        <label for="q9_1">30-45</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_2" value="2">
+                        <label for="q9_2">Diatas 45</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3>10. Bagaimana indeks massa tubuh (BMI) Anda?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_0" value="0">
+                        <label for="q10_0">Normal (18.5-24.9)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_1" value="1">
+                        <label for="q10_1">Overweight (25-29.9)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_2" value="2">
+                        <label for="q10_2">Obesitas (≥30)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="diagnose-btn">Diagnosis Sekarang</button>
+        </div>
+        
+        <div class="result" id="result">
+            <h2>Hasil Diagnosis</h2>
+            <div id="result-text"></div>
+            <div class="suggestion" id="suggestion"></div>
+            <button id="reset-btn" style="margin-top: 20px;">Ulangi Diagnosis</button>
+        </div>
+        
+        <footer>
+            <p>Disclaimer: Sistem ini hanya untuk tujuan edukasi dan tidak menggantikan diagnosis medis profesional.</p>
+            <p>© 2025 Sistem Pakar Diagnosis Diabetes</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
