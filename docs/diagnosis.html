@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Diagnosis Diabetes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --light-blue: #93c5fd;
+            --accent-blue: #2563eb;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e0f2fe;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-blue));
+            transition: width 0.5s ease;
+        }
+        
+        .symptom-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-blue);
+        }
+        
+        .symptom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-blue));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="flex justify-center items-center mb-4">
+                <i class="fas fa-heartbeat text-4xl mr-3 text-blue-600"></i>
+                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                    Sistem Pakar Diagnosis Diabetes
+                </h1>
+            </div>
+            <p class="text-lg text-blue-800 max-w-2xl mx-auto">
+                Sistem ini akan membantu Anda melakukan diagnosis awal terhadap kemungkinan diabetes berdasarkan gejala yang Anda alami.
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Step Progress -->
+            <div class="glass-card p-6 mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <span class="font-medium text-blue-800">Informasi Dasar</span>
+                    </div>
+                    <div class="h-px flex-1 bg-blue-200 mx-4"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center mr-3">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <span class="font-medium text-blue-400">Gejala</span>
+                    </div>
+                    <div class="h-px flex-1 bg-blue-200 mx-4"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center mr-3">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <span class="font-medium text-blue-400">Hasil</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33%"></div>
+                </div>
+            </div>
+
+            <!-- Form untuk step 1 -->
+            <form method="POST" action="" id="step1Form">
+                <!-- User Information Form -->
+                <div class="glass-card p-6 mb-8" id="userInfoForm">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
+                        <i class="fas fa-user-circle mr-3"></i> Informasi Dasar
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-blue-700 mb-2 font-medium">Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap" class="w-full px-4 py-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama Anda" required>
+                        </div>
+                        <div>
+                            <label class="block text-blue-700 mb-2 font-medium">Usia</label>
+                            <input type="number" name="usia" class="w-full px-4 py-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan usia Anda" required min="1" max="120">
+                        </div>
+                        <div>
+                            <label class="block text-blue-700 mb-2 font-medium">Jenis Kelamin</label>
+                            <div class="flex space-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="jenis_kelamin" value="Laki-laki" class="form-radio text-blue-600" required>
+                                    <span class="ml-2">Laki-laki</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="jenis_kelamin" value="Perempuan" class="form-radio text-blue-600" required>
+                                    <span class="ml-2">Perempuan</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-blue-700 mb-2 font-medium">Riwayat Keluarga</label>
+                            <select name="riwayat_diabetes" class="w-full px-4 py-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih riwayat keluarga</option>
+                                <option value="Ada riwayat diabetes">Ada riwayat diabetes</option>
+                                <option value="Tidak ada riwayat diabetes">Tidak ada riwayat diabetes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-end">
+                        <button type="submit" name="submit_step1" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold flex items-center">
+                            Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Symptoms Form -->
+            <div class="glass-card p-6 mb-8 hidden" id="symptomsForm">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
+                    <i class="fas fa-clipboard-list mr-3"></i> Gejala yang Dialami
+                </h2>
+                <p class="text-blue-700 mb-6">Silakan pilih gejala yang Anda alami dalam 3 bulan terakhir:</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <!-- Symptom Cards -->
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'sering_haus')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Sering haus</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Merasa haus terus menerus meski sudah minum</p>
+                    </div>
+                    
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'sering_kencing')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Sering buang air kecil</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Terutama di malam hari</p>
+                    </div>
+                    
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'penurunan_berat')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Penurunan berat badan</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Tanpa sebab yang jelas</p>
+                    </div>
+                    
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'kelelahan')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Kelelahan</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Mudah lelah meski tidak beraktivitas berat</p>
+                    </div>
+                    
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'penglihatan_kabur')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Penglihatan kabur</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Penglihatan tidak jelas atau berbayang</p>
+                    </div>
+                    
+                    <div class="symptom-card bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="toggleSymptom(this, 'luka_sulit_sembuh')">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 rounded-full border-2 border-blue-400 mr-3 flex items-center justify-center">
+                                <i class="fas fa-check text-blue-600 hidden"></i>
+                            </div>
+                            <h3 class="font-medium text-blue-800">Luka sulit sembuh</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Proses penyembuhan luka lebih lama dari biasanya</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="px-6 py-3 rounded-lg font-semibold border border-blue-500 text-blue-600 flex items-center" onclick="prevStep()">
+                        <i class="fas fa-arrow-left mr-2"></i> Kembali
+                    </button>
+                    <button type="button" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold flex items-center" onclick="showResults()">
+                        Lihat Hasil <i class="fas fa-chart-line ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section (Hidden Initially) -->
+            <div class="glass-card p-6 mb-8 hidden" id="resultsSection">
+                <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
+                    <i class="fas fa-clipboard-check mr-3"></i> Hasil Diagnosis
+                </h2>
+                
+                <div class="text-center mb-8">
+                    <div class="inline-block relative">
+                        <div class="w-40 h-40 rounded-full bg-blue-100 flex items-center justify-center mb-4 mx-auto pulse-animation">
+                            <i class="fas fa-exclamation-triangle text-5xl text-yellow-500" id="riskIcon"></i>
+                        </div>
+                        <div class="absolute -bottom-2 left-0 right-0 text-center">
+                            <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium" id="riskBadge">Risiko Sedang</span>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-blue-800 mb-2" id="riskTitle">Anda memiliki beberapa gejala diabetes</h3>
+                    <p class="text-blue-700 max-w-2xl mx-auto" id="riskDescription">
+                        Berdasarkan gejala yang Anda laporkan, sistem mendeteksi kemungkinan diabetes dengan tingkat risiko sedang. Disarankan untuk berkonsultasi dengan dokter untuk pemeriksaan lebih lanjut.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="font-bold text-blue-800 mb-3 flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i> Detail Gejala
+                    </h4>
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <ul class="space-y-2" id="selectedSymptomsList">
+                            <!-- Daftar gejala yang dipilih akan ditampilkan di sini -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="font-bold text-blue-800 mb-3 flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i> Rekomendasi
+                    </h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                            <h5 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <i class="fas fa-utensils mr-2 text-blue-600"></i> Pola Makan
+                            </h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Kurangi konsumsi gula dan karbohidrat sederhana</li>
+                                <li>• Perbanyak sayuran dan serat</li>
+                                <li>• Makan dengan porsi kecil tapi sering</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                            <h5 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <i class="fas fa-running mr-2 text-blue-600"></i> Aktivitas Fisik
+                            </h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Lakukan olahraga ringan 30 menit sehari</li>
+                                <li>• Jalan kaki minimal 10,000 langkah per hari</li>
+                                <li>• Hindari duduk terlalu lama</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                            <h5 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <i class="fas fa-user-md mr-2 text-blue-600"></i> Pemeriksaan Medis
+                            </h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Periksa kadar gula darah puasa</li>
+                                <li>• Lakukan tes HbA1c</li>
+                                <li>• Konsultasi dengan dokter spesialis</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                            <h5 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <i class="fas fa-heartbeat mr-2 text-blue-600"></i> Pemantauan
+                            </h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Catat gejala yang muncul</li>
+                                <li>• Pantau berat badan secara rutin</li>
+                                <li>• Gunakan aplikasi pemantau kesehatan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button type="button" class="px-6 py-3 rounded-lg font-semibold border border-blue-500 text-blue-600 flex items-center" onclick="prevStep()">
+                        <i class="fas fa-arrow-left mr-2"></i> Kembali
+                    </button>
+                    <button type="button" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold flex items-center" onclick="restartProcess()">
+                        <i class="fas fa-redo mr-2"></i> Mulai Lagi
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-blue-700">
+            <p class="mb-2">© 2023 Sistem Pakar Diagnosis Diabetes</p>
+            <p class="text-sm">Hasil diagnosis ini bersifat prediktif dan tidak menggantikan pemeriksaan dokter.</p>
+        </footer>
+    </div>
+
+    <script>
+        let selectedSymptoms = [];
+        
+        // Function to toggle symptom selection
+        function toggleSymptom(element, symptomId) {
+            const checkIcon = element.querySelector('.fa-check');
+            checkIcon.classList.toggle('hidden');
+            element.classList.toggle('bg-blue-50');
+            
+            // Add or remove symptom from selectedSymptoms array
+            const index = selectedSymptoms.indexOf(symptomId);
+            if (index === -1) {
+                selectedSymptoms.push(symptomId);
+            } else {
+                selectedSymptoms.splice(index, 1);
+            }
+            
+            console.log('Gejala yang dipilih:', selectedSymptoms);
+        }
+        
+        // Function to go to next step
+        function nextStep() {
+            document.getElementById('userInfoForm').classList.add('hidden');
+            document.getElementById('symptomsForm').classList.remove('hidden');
+            
+            // Update progress bar
+            document.querySelector('.progress-fill').style.width = '66%';
+            
+            // Update step indicator
+            const step2 = document.querySelectorAll('.flex.items-center')[1];
+            step2.querySelector('div').classList.remove('bg-blue-200', 'text-blue-800');
+            step2.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            step2.querySelector('span').classList.remove('text-blue-400');
+            step2.querySelector('span').classList.add('text-blue-800');
+        }
+        
+        // Function to go to previous step
+        function prevStep() {
+            if (!document.getElementById('symptomsForm').classList.contains('hidden')) {
+                document.getElementById('symptomsForm').classList.add('hidden');
+                document.getElementById('userInfoForm').classList.remove('hidden');
+                
+                // Update progress bar
+                document.querySelector('.progress-fill').style.width = '33%';
+                
+                // Update step indicator
+                const step2 = document.querySelectorAll('.flex.items-center')[1];
+                step2.querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+                step2.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+                step2.querySelector('span').classList.add('text-blue-400');
+                step2.querySelector('span').classList.remove('text-blue-800');
+            } else {
+                document.getElementById('resultsSection').classList.add('hidden');
+                document.getElementById('symptomsForm').classList.remove('hidden');
+                
+                // Update progress bar
+                document.querySelector('.progress-fill').style.width = '66%';
+                
+                // Update step indicator
+                const step3 = document.querySelectorAll('.flex.items-center')[2];
+                step3.querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+                step3.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+                step3.querySelector('span').classList.add('text-blue-400');
+                step3.querySelector('span').classList.remove('text-blue-800');
+            }
+        }
+        
+        // Function to show results
+        function showResults() {
+            // Validate symptoms selection
+            if (selectedSymptoms.length === 0) {
+                alert('Silakan pilih minimal satu gejala sebelum melanjutkan.');
+                return;
+            }
+            
+            document.getElementById('symptomsForm').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            
+            // Update progress bar
+            document.querySelector('.progress-fill').style.width = '100%';
+            
+            // Update step indicator
+            const step3 = document.querySelectorAll('.flex.items-center')[2];
+            step3.querySelector('div').classList.remove('bg-blue-200', 'text-blue-800');
+            step3.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            step3.querySelector('span').classList.remove('text-blue-400');
+            step3.querySelector('span').classList.add('text-blue-800');
+            
+            // Update selected symptoms list
+            updateSelectedSymptomsList();
+            
+            // Calculate and display risk level
+            calculateRiskLevel();
+        }
+        
+        // Function to update selected symptoms list
+        function updateSelectedSymptomsList() {
+            const symptomsList = document.getElementById('selectedSymptomsList');
+            symptomsList.innerHTML = '';
+            
+            selectedSymptoms.forEach(symptom => {
+                const listItem = document.createElement('li');
+                listItem.className = 'flex items-start';
+                listItem.innerHTML = `
+                    <i class="fas fa-check-circle text-blue-600 mt-1 mr-2"></i>
+                    <span>${getSymptomName(symptom)}</span>
+                `;
+                symptomsList.appendChild(listItem);
+            });
+        }
+        
+        // Function to get symptom name by ID
+        function getSymptomName(symptomId) {
+            const symptomNames = {
+                'sering_haus': 'Sering haus',
+                'sering_kencing': 'Sering buang air kecil',
+                'penurunan_berat': 'Penurunan berat badan',
+                'kelelahan': 'Kelelahan',
+                'penglihatan_kabur': 'Penglihatan kabur',
+                'luka_sulit_sembuh': 'Luka sulit sembuh'
+            };
+            
+            return symptomNames[symptomId] || symptomId;
+        }
+        
+        // Function to calculate risk level
+        function calculateRiskLevel() {
+            const riskLevels = {
+                rendah: { count: 1, color: 'green', icon: 'fa-smile', text: 'Risiko Rendah' },
+                sedang: { count: 2, color: 'yellow', icon: 'fa-meh', text: 'Risiko Sedang' },
+                tinggi: { count: 4, color: 'red', icon: 'fa-frown', text: 'Risiko Tinggi' }
+            };
+            
+            let riskLevel = 'rendah';
+            let icon = 'fa-smile';
+            let color = 'green';
+            let text = 'Risiko Rendah';
+            
+            if (selectedSymptoms.length >= riskLevels.tinggi.count) {
+                riskLevel = 'tinggi';
+                icon = 'fa-frown';
+                color = 'red';
+                text = 'Risiko Tinggi';
+            } else if (selectedSymptoms.length >= riskLevels.sedang.count) {
+                riskLevel = 'sedang';
+                icon = 'fa-meh';
+                color = 'yellow';
+                text = 'Risiko Sedang';
+            }
+            
+            // Update risk display
+            const riskIcon = document.getElementById('riskIcon');
+            const riskBadge = document.getElementById('riskBadge');
+            const riskTitle = document.getElementById('riskTitle');
+            const riskDescription = document.getElementById('riskDescription');
+            
+            riskIcon.className = `fas ${icon} text-5xl text-${color}-500`;
+            riskBadge.className = `bg-${color}-600 text-white px-4 py-1 rounded-full text-sm font-medium`;
+            riskBadge.textContent = text;
+            riskTitle.textContent = getRiskTitle(riskLevel);
+            riskDescription.textContent = getRiskDescription(riskLevel);
+        }
+        
+        // Function to get risk title based on level
+        function getRiskTitle(riskLevel) {
+            const titles = {
+                rendah: 'Anda memiliki sedikit gejala diabetes',
+                sedang: 'Anda memiliki beberapa gejala diabetes',
+                tinggi: 'Anda memiliki banyak gejala diabetes'
+            };
+            return titles[riskLevel] || titles['sedang'];
+        }
+        
+        // Function to get risk description based on level
+        function getRiskDescription(riskLevel) {
+            const descriptions = {
+                rendah: 'Berdasarkan gejala yang Anda laporkan, sistem mendeteksi kemungkinan diabetes dengan tingkat risiko rendah. Tetap jaga pola hidup sehat.',
+                sedang: 'Berdasarkan gejala yang Anda laporkan, sistem mendeteksi kemungkinan diabetes dengan tingkat risiko sedang. Disarankan untuk berkonsultasi dengan dokter untuk pemeriksaan lebih lanjut.',
+                tinggi: 'Berdasarkan gejala yang Anda laporkan, sistem mendeteksi kemungkinan diabetes dengan tingkat risiko tinggi. Sangat disarankan untuk segera berkonsultasi dengan dokter untuk pemeriksaan lebih lanjut.'
+            };
+            return descriptions[riskLevel] || descriptions['sedang'];
+        }
+        
+        // Function to restart the process
+        function restartProcess() {
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('userInfoForm').classList.remove('hidden');
+            
+            // Reset progress bar
+            document.querySelector('.progress-fill').style.width = '33%';
+            
+            // Reset step indicators
+            const steps = document.querySelectorAll('.flex.items-center');
+            steps[1].querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+            steps[1].querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            steps[1].querySelector('span').classList.add('text-blue-400');
+            steps[1].querySelector('span').classList.remove('text-blue-800');
+            
+            steps[2].querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+            steps[2].querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            steps[2].querySelector('span').classList.add('text-blue-400');
+            steps[2].querySelector('span').classList.remove('text-blue-800');
+            
+            // Reset symptom selections
+            const symptoms = document.querySelectorAll('.symptom-card');
+            symptoms.forEach(symptom => {
+                symptom.querySelector('.fa-check').classList.add('hidden');
+                symptom.classList.remove('bg-blue-50');
+            });
+            
+            // Reset selected symptoms array
+            selectedSymptoms = [];
+            
+            // Reset form
+            document.getElementById('step1Form').reset();
+        }
+
+        // Form submission handler
+        document.getElementById('step1Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const formData = new FormData(this);
+            let isValid = true;
+            
+            for (let [key, value] of formData.entries()) {
+                if (!value.trim()) {
+                    isValid = false;
+                    break;
+                }
+            }
+            
+            if (!isValid) {
+                alert('Harap lengkapi semua field yang diperlukan.');
+                return;
+            }
+            
+            // If validation passes, proceed to next step
+            nextStep();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Diagnosis Diabetes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --light-blue: #93c5fd;
+            --accent-blue: #2563eb;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e0f2fe;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-blue));
+            transition: width 0.5s ease;
+        }
+        
+        .symptom-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-blue);
+        }
+        
+        .symptom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-blue));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="flex justify-center items-center mb-4">
+                <i class="fas fa-heartbeat text-4xl mr-3 text-blue-600"></i>
+                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                    Sistem Pakar Diagnosis Diabetes
+                </h1>
+            </div>
+            <p class="text-lg text-blue-800 max-w-2xl mx-auto">
+                Sistem ini akan membantu Anda melakukan diagnosis awal terhadap kemungkinan diabetes berdasarkan gejala yang Anda alami.
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Welcome Section -->
+            <div class="glass-card p-8 text-center mb-8">
+                <div class="max-w-2xl mx-auto">
+                    <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heartbeat text-4xl text-blue-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-blue-800 mb-4">Selamat Datang di Sistem Pakar Diagnosis Diabetes</h2>
+                    <p class="text-blue-700 mb-6">
+                        Sistem ini akan membantu Anda melakukan pemeriksaan awal terhadap kemungkinan diabetes berdasarkan gejala yang Anda alami. 
+                        Diagnosis ini bersifat prediktif dan tidak menggantikan pemeriksaan dokter.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-clipboard-list text-2xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold text-blue-800 mb-2">Identifikasi Gejala</h3>
+                            <p class="text-sm text-gray-600">Pilih gejala yang Anda alami</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-chart-line text-2xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold text-blue-800 mb-2">Analisis Cepat</h3>
+                            <p class="text-sm text-gray-600">Sistem menganalisis gejala Anda</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <i class="fas fa-file-medical text-2xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold text-blue-800 mb-2">Hasil & Rekomendasi</h3>
+                            <p class="text-sm text-gray-600">Dapatkan laporan dan saran</p>
+                        </div>
+                    </div>
+                    <a href="diagnosis.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold text-lg flex items-center justify-center mx-auto w-fit">
+                        Mulai Diagnosis <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 text-blue-700">
+            <p class="mb-2">© 2023 Sistem Pakar Diagnosis Diabetes</p>
+            <p class="text-sm">Hasil diagnosis ini bersifat prediktif dan tidak menggantikan pemeriksaan dokter.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to start diagnosis
+        function startDiagnosis() {
+            document.querySelector('#stepProgress').classList.remove('hidden');
+            document.querySelector('.glass-card.p-8').classList.add('hidden');
+            
+            // Update progress bar
+            document.querySelector('.progress-fill').style.width = '33%';
+            
+            // Update step indicator
+            const step1 = document.querySelectorAll('.flex.items-center')[0];
+            step1.querySelector('div').classList.remove('bg-blue-200');
+            step1.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            step1.querySelector('span').classList.remove('text-blue-400');
+            step1.querySelector('span').classList.add('text-blue-800');
+        }
+
+        // Function to toggle symptom selection
+        function toggleSymptom(element) {
+            const checkIcon = element.querySelector('.fa-check');
+            checkIcon.classList.toggle('hidden');
+            element.classList.toggle('bg-blue-50');
+        }
+        
+        // Function to go to next step
+        function nextStep() {
+            document.getElementById('userInfoForm').classList.add('hidden');
+            document.getElementById('symptomsForm').classList.remove('hidden');
+            
+            // Update progress bar
+            document.querySelector('.progress-fill').style.width = '66%';
+            
+            // Update step indicator
+            const step2 = document.querySelectorAll('.flex.items-center')[1];
+            step2.querySelector('div').classList.remove('bg-blue-200');
+            step2.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            step2.querySelector('span').classList.remove('text-blue-400');
+            step2.querySelector('span').classList.add('text-blue-800');
+        }
+        
+        // Function to go to previous step
+        function prevStep() {
+            if (!document.getElementById('symptomsForm').classList.contains('hidden')) {
+                document.getElementById('symptomsForm').classList.add('hidden');
+                document.getElementById('userInfoForm').classList.remove('hidden');
+                
+                // Update progress bar
+                document.querySelector('.progress-fill').style.width = '33%';
+                
+                // Update step indicator
+                const step2 = document.querySelectorAll('.flex.items-center')[1];
+                step2.querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+                step2.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+                step2.querySelector('span').classList.add('text-blue-400');
+                step2.querySelector('span').classList.remove('text-blue-800');
+            } else {
+                document.getElementById('resultsSection').classList.add('hidden');
+                document.getElementById('symptomsForm').classList.remove('hidden');
+                
+                // Update progress bar
+                document.querySelector('.progress-fill').style.width = '66%';
+                
+                // Update step indicator
+                const step3 = document.querySelectorAll('.flex.items-center')[2];
+                step3.querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+                step3.querySelector('div').classList.remove('bg-blue-600', 'text-white');
+                step3.querySelector('span').classList.add('text-blue-400');
+                step3.querySelector('span').classList.remove('text-blue-800');
+            }
+        }
+        
+        // Function to show results
+        function showResults() {
+            document.getElementById('symptomsForm').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            
+            // Update progress bar
+            document.querySelector('.progress-fill').style.width = '100%';
+            
+            // Update step indicator
+            const step3 = document.querySelectorAll('.flex.items-center')[2];
+            step3.querySelector('div').classList.remove('bg-blue-200');
+            step3.querySelector('div').classList.add('bg-blue-600', 'text-white');
+            step3.querySelector('span').classList.remove('text-blue-400');
+            step3.querySelector('span').classList.add('text-blue-800');
+        }
+        
+        // Function to restart the process
+        function restartProcess() {
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('userInfoForm').classList.add('hidden');
+            document.getElementById('stepProgress').classList.add('hidden');
+            document.querySelector('.glass-card.p-8').classList.remove('hidden');
+            
+            // Reset progress bar
+            document.querySelector('.progress-fill').style.width = '33%';
+            
+            // Reset step indicators
+            const steps = document.querySelectorAll('.flex.items-center');
+            steps[1].querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+            steps[1].querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            steps[1].querySelector('span').classList.add('text-blue-400');
+            steps[1].querySelector('span').classList.remove('text-blue-800');
+            
+            steps[2].querySelector('div').classList.add('bg-blue-200', 'text-blue-800');
+            steps[2].querySelector('div').classList.remove('bg-blue-600', 'text-white');
+            steps[2].querySelector('span').classList.add('text-blue-400');
+            steps[2].querySelector('span').classList.remove('text-blue-800');
+            
+            // Reset symptom selections
+            const symptoms = document.querySelectorAll('.symptom-card');
+            symptoms.forEach(symptom => {
+                symptom.querySelector('.fa-check').classList.add('hidden');
+                symptom.classList.remove('bg-blue-50');
+            });
+        }
+    </script>
+</body>
+</html>
